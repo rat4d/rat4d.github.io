@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>RAT4D: Rig and Animate any object without Templates in 4D</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://rat4d.github.io/img/rep_img.jpeg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1711">
+    <meta property="og:image:height" content="576">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://rat4d.github.io/" />
+    <meta property="og:title" content="RAT4D: Rig and Animate any object without Templates in 4D" />
+    <meta property="og:description"
+        content="Advances in 3D reconstruction have enabled high-quality 3D capture, but require a user to collect hundreds to thousands of images to create a 3D scene. We present CAT3D, a method for creating anything in 3D by simulating this real-world capture process with a multi-view diffusion model. Given any number of input images and a set of target novel viewpoints, our model generates highly consistent novel views of a scene. These generated views can be used as input to robust 3D reconstruction techniques to produce 3D representations that can be rendered from any viewpoint in real-time. CAT3D can create entire 3D scenes in as little as one minute, and outperforms existing methods for single image and few-view 3D scene creation." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="RAT4D: Rig and Animate any object without Templates in 4D" />
+    <meta name="twitter:description"
+        content="Advances in 3D reconstruction have enabled high-quality 3D capture, but require a user to collect hundreds to thousands of images to create a 3D scene. We present CAT3D, a method for creating anything in 3D by simulating this real-world capture process with a multi-view diffusion model. Given any number of input images and a set of target novel viewpoints, our model generates highly consistent novel views of a scene. These generated views can be used as input to robust 3D reconstruction techniques to produce 3D representations that can be rendered from any viewpoint in real-time. CAT3D can create entire 3D scenes in as little as one minute, and outperforms existing methods for single image and few-view 3D scene creation." />
+    <meta name="twitter:image" content="https://rat4d.github.io/img/rep_img.jpeg" />
+
+    <link rel="icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-8ZERS5BVPS');
+    </script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+        </script>
+    <script defer src="js/fontawesome.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/synced_video_selector.js"></script>
+
+    <script type="module">
+        import { createSplatView, setSplatScene, setupCarousel } from "./js/splats.js"
+        setupCarousel(createSplatView("splat-picker"), document.querySelector("#splat-carousel"));
+    </script>
+    <style>
+        .final-element {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body style="padding: 5%; padding-top: min(15px, 5%); padding-bottom: min(5px, 5%); width: 100%">
+    <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
+        <header role="banner">
+            <!-- <div class="container" id="main"> -->
+            <div class="row">
+                <h2 class="col-md-12 text-center">
+                    <b>RAT4D:</b> <b>R</b>ig and <b>A</b>nimate any object without <b>T</b>emplates in 4D</br>
+                </h2>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                </div>
+                <div class="container-fluid text-center">
+                    <ul class="list-inline" style="white-space: nowrap; margin:0px 0px 0px 0px;" >
+                        <li><a style="font-size: calc(min(3vw, 15px))" href="https://mosamdabhi.github.io/">Mosam Dabhi¹</a><!--don't add a linebreak here! it adds a space!--><div style="display: inline; font-family:verdana"></div>
+                        </li>
+                        <li><a style="font-size: calc(min(3vw, 15px))" href="https://scholar.google.com/citations?user=vmAe35UAAAAJ&hl=en">Simon Lucey²</a>
+                        <li><a style="font-size: calc(min(3vw, 15px))" href="https://laszlojeni.com/">László A. Jeni¹</a>
+                        </li><br>
+                        </li><!--don't add a linebreak here! it adds a space!--><div style="display: inline; font-family:verdana"></div></li>
+                    </ul>
+                </div>
+                <div class="col-md-12 text-center" style="font-size: calc(min(3vw, 15px))">
+            ¹Carnegie Mellon University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;²The University of Adelaide&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </div>
+            <div class="row text-center">
+                <span class="link-block" style="padding-top: 10px; padding-bottom: 10px">
+                    <a href="https://arxiv.org/abs/2405.10314" class="external-link button is-normal is-rounded is-dark"
+                        style="width: 80px; font-size: 15px">
+                        <span class="icon">
+                            <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>arXiv</span>
+                    </a>
+                    <a href="gallery.html" class="external-link button is-normal is-rounded is-dark"
+                        style="width: 120px; font-size: 15px">
+                        <span>Gallery</span>
+                    </a>
+                </span>
+            </div>
+        </header>
+
+        <main role="main">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <video id="co3d-grid" poster="img/teaser_frame.jpg" width="100%" autoplay loop muted controls playsinline>
+					  <source src="videos/teaser/cat_compress.mp4" type="video/mp4"></source>
+                        A grid of various image to 3D results are shown, ranging from animals, food, fantasy creatures, paintings, and
+                        nature scenes. A zoom reveals an even larger grid of results. The animated CAT3D logo appears.
+                    </video>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 offset-md-2 rounded" style="text-align: center; padding-bottom: 0px; padding-top: 5px; background-color: #d0d5ec;">
+                    <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: Create 4D rigs and models of any deformable object without templates from a single video.</h6>
+                </div>
+            </div><br><br>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3> How it works </h3>
+                    <p class="text-justify" style="text-align: left;">
+                        From a single monocular image, our RAT4D method utilizes a sophisticated nonlinear optimization process to refine detected 2D landmarks into accurate 3D poses, free from the constraints of predefined templates. These refined poses are then processed through a template-free Gaussian splatting renderer to create re-animatable and high-fidelity 3D models. The entire process, from image input to 3D model generation, is designed to be efficient, typically completing within a few minutes.
+                    </p>
+                    <video muted loop autoplay src="videos/howitworks.mp4" style="max-width:878px" width=100%>
+                        An animated diagram briefly describing the method. On the left, an input image is shown. Next are samples from the
+                        diffusion model (5 secs), with a spinning camera path. Finally, it shows the optimised 3D Model obtained by
+                        optimizing a NeRF (55 seconds).
+                    </video>
+                </div>
+            </div><br><br>
+
+            <div class="row col-md-8 offset-md-2 rounded card" style="background-color: #d0d5ec;">
+                <h2 style="text-align: center;">Interactive Results</h2>
+                Explore our 3D scenes, converted to Gaussian Splats.
+                <div class="text-center" id="splat-picker">
+                    <div id="progress-container">
+                        <dialog open id="progress-dialog">
+                            <label for="progress-indicator">Loading model...</label>
+                            <progress max="100" id="progress-indicator"></progress>
+                        </dialog>
+                    </div>
+
+                    <canvas id="splat-canvas" class="w-100 rounded"
+                        style="max-width:440px; aspect-ratio: 1; cursor: grab; margin-left: auto;
+                        margin-right: auto;"></canvas>
+                </div>
+
+                <div class="splat-carousel position-relative" id="splat-carousel" role="group" aria-relevant="additions text">
+                    <div class="splat-carousel-items">
+                        <div id="splat-carousel-prototype">
+                            <div class="splat-carousel-item">
+                                <img class="card-img" style="user-drag: none;pointer-events: none; user-select:none;" src="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="splat-carousel-buttons">
+                        <button class="splat-carousel-button left">&#8249;</button>
+                        <button class="splat-carousel-button right">&#8250;</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
+           
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3>
+                        Detailed analysis of our method
+                    </h3>
+<!-- 
+                    <p class="text-justify" style="text-align: left;">
+                        Compare the renders and depth maps of our method CAT3D (right) with baseline methods (left). Try selecting different
+                        methods and scenes!
+                    </p> -->
+
+                    <div id="single-image-compare">
+                        <div class="row m-2">
+                            <div class="col-md-10">
+                                <ul class="nav nav-pills justify-content-center" role="navigation">
+                                    <li class="nav-item">
+                                        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                                            style="width: 110px"><strong>Comparison method:</strong></a> -->
+                                    </li>
+                                    <li class="nav-item method-pill" data-value="realmdreamer">
+                                        <a class="nav-link active"></a>
+                                    </li>
+                                    <!-- <li class="nav-item method-pill" data-value="zero_nvs"><a class="nav-link">ZeroNVS <span style="font-size: 10px;"><br>(Single View)</span></a></li> -->
+                                    <!-- <li class="nav-item method-pill" data-value="image_dream"><a class="nav-link">ImageDream <span style="font-size: 10px;"><br>(Single View)</span></a> </li> -->
+                                    <!-- <li class="nav-item method-pill" data-value="zipnerf"><a class="nav-link">ZipNeRF <span style="font-size: 10px;"><br>(3 View)</span></a></li> -->
+                                    <!-- <li class="nav-item method-pill" data-value="reconfusion"><a class="nav-link">ReconFusion <span style="font-size: 10px;"><br>(3 View)</span></a></li> -->
+                                </ul>
+                            </div>
+
+                            <div class="btn-group btn-group-sm col-md-2 d-flex align-items-center" style="padding-top: 5px" id="mode-buttons">
+                                <button class="btn btn-primary mode-pill float-right active" data-value="rgb">
+                                    Model
+                                </button>
+                                <button class="btn btn-primary mode-pill float-right" data-value="means">
+                                    Means
+                                </button>                                                              
+                                <button class="btn btn-primary mode-pill float-right" data-value="application">
+                                    Application
+                                </button>                                                                                              
+                                <button class="btn btn-primary mode-pill float-right" data-value="depth">
+                                    Depth
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="video-container container position-relative p-0">
+
+                            <video class="video col-6" id="single-comp-left" loop playsinline autoplay muted>
+                            </video><video class="video col-6" id="single-comp-right" loop playsinline autoplay muted>
+                            </video>
+
+                            <div class="overlay position-absolute bg-dark top-0 start-0 text-white p-1 opacity-75"
+                                id="single-comp-label-left">Input</div>
+                            <div class="overlay position-absolute bg-dark top-0 start-50 text-white p-1 opacity-75"
+                                id="single-comp-label-right"><img src="img/cat3D.png" style="width: 30px;"></div>
+                        </div>
+
+                        <div class="pill-row scene-pills" id="realmdreamer-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="tokyo">
+                                <img class="card-img" src="thumbnails/rat4d/tokyo.png">
+                            </div>                                                                           
+                            <div class="pill scene-pill" data-value="bug">
+                                <img class="card-img" src="thumbnails/rat4d/bug.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="kangaroo">
+                                <img class="card-img" src="thumbnails/rat4d/kangaroo.jpeg">
+                            </div>                            
+                            <div class="pill scene-pill" data-value="box">
+                                <img class="card-img" src="thumbnails/rat4d/box.jpeg">
+                            </div>                                                                        
+                            <div class="pill scene-pill" data-value="man">
+                                <img class="card-img" src="thumbnails/rat4d/man.jpeg">
+                            </div>             
+                            <div class="pill scene-pill" data-value="capsulemachine">
+                                <img class="card-img" src="thumbnails/rat4d/capsulemachine.jpeg">
+                            </div>                                         
+                            <div class="pill scene-pill" data-value="dog">
+                                <img class="card-img" src="thumbnails/rat4d/dog.jpeg">
+                            </div>       
+                            <div class="pill scene-pill" data-value="fish">
+                                <img class="card-img" src="thumbnails/rat4d/fish.png">
+                            </div>                                                                     
+                            <div class="pill scene-pill" data-value="h36mgirl">
+                                <img class="card-img" src="thumbnails/rat4d/h36mgirl.png">
+                            </div>                                                                                                 
+                            <div class="pill scene-pill" data-value="rat">
+                                <img class="card-img" src="thumbnails/rat4d/rat.jpeg">
+                            </div>                                                  
+                            <div class="pill scene-pill" data-value="deer">
+                                <img class="card-img" src="thumbnails/rat4d/deer.png">
+                            </div>                                                  
+                            <div class="pill scene-pill" data-value="dogsora">
+                                <img class="card-img" src="thumbnails/rat4d/dogsora1.png">
+                            </div>                
+                            <div class="pill scene-pill" data-value="h36mboy">
+                                <img class="card-img" src="thumbnails/rat4d/h36mboy.png">
+                            </div>               
+                            <div class="pill scene-pill" data-value="tiger">
+                                <img class="card-img" src="thumbnails/rat4d/tiger.jpeg">
+                            </div>                                                                                                                                                                                                                 
+
+
+                        </div>
+
+                    </div>
+
+                    <script>
+                        playbackSpeeds = {
+                            "realmdreamer": [1.0, 1.0],
+                            "zero_nvs": [1.5, 1.0],
+                            "zipnerf": [1.5, 1.0],
+                            "reconfusion": [1.5, 1.0],
+                            "image_dream": [1.5, 1.0],
+                        };
+
+                        aspectRatios = {
+                            "realmdreamer": 1.0,
+                            "zero_nvs": 1.5,
+                            "zipnerf": 1.5,
+                            "reconfusion": 1.5,
+                            "image_dream": 1.0,
+                        }
+
+                        labels = {
+                            "realmdreamer": "Input",
+                            "zero_nvs": "ZeroNVS",
+                            "zipnerf": "ZipNeRF (3-view)",
+                            "reconfusion": "ReconFusion (3-view)",
+                            "image_dream": "ImageDream",
+                        }
+
+                        compareDiv = document.querySelector("#single-image-compare")
+                        activeMethod = "realmdreamer"
+                        activeScene = "bug"
+                        activeMode = "rgb"
+
+                        // Select all elements with the class 'method-pill'
+                        const methodPills = compareDiv.querySelectorAll('.method-pill');
+                        const modePillParent = compareDiv.querySelector('#mode-buttons')
+                        const modePills = modePillParent.querySelectorAll('.mode-pill')
+
+                        for (modePill of modePills) {
+                            modePill.addEventListener('click', function () {
+                                activeMode = this.getAttribute('data-value');
+                                updateDisplay();
+                            });
+                        }
+
+
+                        const videoParent = compareDiv.querySelector(".video-container");
+                        const leftVideo = videoParent.querySelector('#single-comp-left')
+                        const leftLabel = videoParent.querySelector("#single-comp-label-left")
+                        const rightVideo = videoParent.querySelector('#single-comp-right')
+                        const scenePillContainers = compareDiv.querySelectorAll(`.scene-pills`);
+
+                        for (methodPill of methodPills) {
+                            const method = methodPill.getAttribute('data-value');
+                            // Select all scene pill containers
+                            const scenePillContainer = compareDiv.querySelector(`#${method}-pills`);
+                            const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+
+                            for (scenePill of scenePills) {
+                                scenePill.addEventListener('click', function () {
+                                    activeScene = this.getAttribute("data-value")
+                                    console.log(activeScene);
+                                    updateDisplay();
+                                });
+                            }
+
+                            // Attach a click event listener to each pill
+                            methodPill.addEventListener('click', function () {
+                                activeMethod = method
+                                activeMode = "rgb"
+                                const scenePillContainer = compareDiv.querySelector(`#${method}-pills`);
+                                const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+                                activeScene = scenePills[0].getAttribute("data-value")
+                                updateDisplay();
+                            });
+                        }
+
+                        function updateDisplay() {
+                            if (activeMethod == 'image_dream') {
+                                modePillParent.style.display = 'none';
+                            } else {
+                                modePillParent.style.display = '';
+                            }
+                            // Update active pill
+
+                            methodPills.forEach(p => p.classList.remove('active'));
+                            methodPills.forEach(methodPill => {
+                                if (methodPill.getAttribute('data-value') == activeMethod) {
+                                    methodPill.querySelector('a').classList.add('active');
+                                } else {
+                                    methodPill.querySelector('a').classList.remove('active')
+                                }
+                            });
+
+                            // Update mode pill
+                            for (modePill of modePills) {
+                                if (modePill.getAttribute('data-value') === activeMode) {
+                                    modePill.classList.add('active');
+                                } else {
+                                    modePill.classList.remove('active');
+                                }
+                            }
+
+                            // Show/Hide scene pill containers based on the selected method
+                            scenePillContainers.forEach(container => {
+                                if (container.id === `${activeMethod}-pills`) {
+                                    container.style.display = ''; // Or 'block' depending on your layout
+                                } else {
+                                    container.style.display = 'none';
+                                }
+                            });
+
+                            const scenePillContainer = compareDiv.querySelector(`#${activeMethod}-pills`);
+                            const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+
+                            for (scenePill of scenePills) {
+                                if (scenePill.getAttribute('data-value') == activeScene) {
+                                    scenePill.classList.add('active');
+                                } else {
+                                    scenePill.classList.remove('active')
+                                }
+                            }
+
+
+                            var zdist = "";
+                            if (activeMode == "means") {
+                                zdist = "_means";
+                            } else if (activeMode == "depth") {
+                                zdist = "_zdist";
+                            } else if (activeMode == "application") {
+                                zdist = "_application";
+                            }
+
+
+
+                            // Update video display. This still has a small flash, could double buffer the video like before, but
+                            // as long as the layout stays consistent it really isn't bad.
+                            leftVideo.src = `videos/comparison/${activeMethod}/baseline/${activeScene}${zdist}.webm`
+                            rightVideo.src = `videos/comparison/${activeMethod}/ours/${activeScene}${zdist}.webm`
+
+
+                            var [lr, rr] = playbackSpeeds[activeMethod];
+                            leftVideo.playbackRate = lr;
+                            rightVideo.playbackRate = rr;
+
+                            videoParent.style.aspectRatio = aspectRatios[activeMethod] * 2.0;
+
+                            console.log(leftLabel)
+                            console.log(leftLabel.innerHtml)
+
+                            leftLabel.innerHTML = labels[activeMethod];
+                        }
+                        // Update initial display
+                        updateDisplay()
+                    </script>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>            
+
+
+
+
+
+
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3> Method overview </h3>
+                    <image width=100% src="img/method.jpg"
+                        alt="A diagram explaining the method in broad strokes, like explained in the caption."></image>
+
+                    <figcaption class="text-justify margin-5" style="text-align: left;">
+                        RAT4D leverages a <b>nonlinear optimization framework</b> to enhance the fidelity of 3D poses from <font color="#5583A8"><b>monocular sequences</b></font> (single images used as input), and is engineered to refine these into detailed <font color="#E3B555"><b>3D skeletal models</b></font> that can be dynamically <font color="#924956"><b>re-posed and animated</b></font>. This process utilizes state-of-the-art techniques in 3D lifting and Gaussian splatting, comparable to the methods used in template-based modeling but without their limitations. The optimized 3D models are then capable of being used in high-quality visual applications, bridging the gap between simple inputs and complex 3D outputs                    </p>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-8 offset-md-2 text-start">
+                <h4>
+                    Acknowledgements
+                </h4>
+
+                <p class="text-justify" style="text-align: left;">
+                    We would like to thank Daniel Watson, Rundi Wu, Richard Tucker, Jason Baldridge, Michael Niemeyer, Rick
+                    Szeliski, Dana Roth, Jordi Pont-Tuset, Andeep Torr, Irina Blok, Doug Eck, and Henna Nandwani for their valuable
+                    contributions to this work. We also extend our gratitude to Shlomi Fruchter, Kevin Murphy, Mohammad Babaeizadeh, Han Zhang and Amir Hertz for training the base text-to-image latent diffusion model.
+                    <br><br><br>
+                </p>
+            </div> -->
+            <div class="row justify-content-center">
+                <div class="col-md-5 center text-start">
+                    <label style="display: inline" for="bibtex">
+                        <h4 style="text-align: center">BibTeX </h4>
+                    </label>
+                    <textarea id="bibtex" class="form-control" readonly>
+                        @article{dabhi2024rat4d,
+                            title={RAT4D: Rig and Animate any object without Templates in 4D},
+                            author={Mosam Dabhi and Simon Lucey and László A. Jeni},
+                            journal={arXiv},
+                            year={2024}
+                        }
+                        
+                        </textarea>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <video class="w-100 h-100" style="max-width:200px" src="videos/teaser/wizard_cat.mp4" muted loop autoplay playsinline>An animated illustrated cat paws at an
+                        image. It turns into a 3D cat head!</video>
+                </div>
+            </div>
+
+
+        </main>
+        <footer>
+            <div class="row">
+                <div class="col-md-8 offset-md-2 text-start">
+
+                    <p class="text-justify" style="text-align: left;">
+                        <i>
+                            The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>,
+                            <a href="https://dorverbin.github.io/refnerf">Ref-NeRF</a>, and <a
+                                href="https://reconfusion.github.io">ReconFusion</a>.
+                        </i>
+                    </p>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+</body>
+
+</html>
