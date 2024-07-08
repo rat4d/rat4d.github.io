@@ -22,7 +22,7 @@ class OrbitControls {
         canvas,
         alpha = 0.5,
         beta = 0.5,
-        radius = 5,
+        radius = 50,
         enableKeyboardControls = true,
         inputTarget = new Vector3()
     ) {

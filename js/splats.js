@@ -11,15 +11,7 @@ function shuffleArray(array) {
 
 async function listFolders() {
     const directories = [
-        "26_input", "5_input", "A_crab_made_of_cheese_on_a_plate",
-        "A_smiling_sloth_is_wearing_a_leather_jacket_a_cowboy_hat_a_kilt_and_a_bowtie",
-        "A_well_dressed_rabbit_using_a_1980s_desktop_computer", "Car_in_the_style_of_a_gingerbread_house",
-        "Frog_sitting_in_a_1950s_diner_wearing_a_leather_jacket_and_a_top_hat", "PXL_20240428_202557974",
-        "Photo_of_surreal_room_with_everything_made_from_whipped_cream_monotone_white_colors",
-        "a_bunch_of_colorful_marbles_spilling_out_of_a_red_velvet_bag", "bearcastle", "bee_0input", 
-        "bonefire_i2v", "car", "cauliflower_sheep", "download_(12)_0input", "download_(14)_(2)_0input", 
-        "download_(47)_0input", "frog", "frog_2", "ghost", "img_0_110", "lighthouse", "pig", "poly_fox", 
-        "teddybear_nyc_i2v", "word_art_gen3d"
+        "bug", "man", "kangaroo", "tokyo"
     ];
     return directories;
 }
@@ -43,13 +35,16 @@ export async function setSplatScene(name, view) {
     view.loading = true;
     view.lastClick = new Date();
 
-    const startRadius = 0.8;
+    const startRadius = 2.5;
 
     const cameraData = new SPLAT.CameraData();
     cameraData.fx = 0.9 * startRadius * view.canvas.offsetWidth;
     cameraData.fy = 0.9 * startRadius * view.canvas.offsetHeight;
 
     const camera = new SPLAT.Camera(cameraData);
+    // camera.position.set(0, 0, 2 * startRadius); // Adjust this value to zoom out further
+    // camera.position.set(0, 0, 3 * startRadius); // Adjust this value to zoom out further
+
     const renderer = new SPLAT.WebGLRenderer(view.canvas);
     const scene = new SPLAT.Scene();
 
@@ -60,21 +55,43 @@ export async function setSplatScene(name, view) {
         view.progressIndicator.value = progress * 100;
     });
 
-    const rotation = new SPLAT.Vector3(Math.PI - Math.PI / 20.0, Math.PI, 0);
-    splat.rotation = SPLAT.Quaternion.FromEuler(rotation);
-    splat.applyRotation();
+    // const rotation = new SPLAT.Vector3(Math.PI - Math.PI / 20.0, Math.PI, 0);
+    // // const rotation = new SPLAT.Vector3(-Math.PI, -Math.PI, 0);
+    // splat.rotation = SPLAT.Quaternion.FromEuler(rotation);
+    // splat.applyRotation();
+
+    // const correctiveRotation = new SPLAT.Vector3(Math.PI, 0, 0); // Flip around x-axis
+    // splat.rotation = SPLAT.Quaternion.FromEuler(correctiveRotation);
+    // splat.applyRotation();
+
 
     view.progressDialog.close();
 
-    var controls = new OrbitControls(camera, view.canvas, /*alpha=*/0.0, /*beta=*/0.0, /*radius=*/startRadius, /*enableKeyboardControls=*/false);
-    controls.minAngle = -10;
-    controls.maxAngle = 10;
-    controls.minZoom = 0.6;
-    controls.maxZoom = 0.9;
-    controls.zoomSpeed = 0.03;
+    var controls = new OrbitControls(camera, view.canvas, /*alpha=*/0.0, /*beta=*/0.0, /*radius=*/15, /*enableKeyboardControls=*/false);
+    // controls.minAngle = -10;
+    // controls.maxAngle = 10;
+    // controls.minZoom = 1.5;
+    // controls.maxZoom = 3.5;
+    // controls.zoomSpeed = 0.03;
+    // controls.panSpeed = 0.2;
+    // controls.orbitSpeed = 1.75;
+    // controls.maxPanDistance = 0.05;
+    controls.minAngle = -360;
+    controls.maxAngle = 360;
+    controls.minZoom = 1.5;
+    controls.maxZoom = 35;
+    controls.zoomSpeed = 3;
     controls.panSpeed = 0.2;
     controls.orbitSpeed = 1.75;
-    controls.maxPanDistance = 0.05;
+    controls.maxPanDistance = 0.05;    
+    // controls.minAngle = -360;
+    // controls.maxAngle = 360;
+    // controls.minZoom = 0.8;
+    // controls.maxZoom = 0.9;
+    // controls.zoomSpeed = 0.03;
+    // controls.panSpeed = 0.2;
+    // controls.orbitSpeed = 1.75;
+    // controls.maxPanDistance = 1000;    
 
     const newAnimation = view.runningAnimation == null;
 
