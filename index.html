@@ -18,7 +18,7 @@
     <meta property="og:url" content="https://rat4d.github.io/" />
     <meta property="og:title" content="RAT4D: Rig and Animate any object without Templates in 4D" />
     <meta property="og:description"
-        content="Advances in 3D reconstruction have enabled high-quality 3D capture, but require a user to collect hundreds to thousands of images to create a 3D scene. We present CAT3D, a method for creating anything in 3D by simulating this real-world capture process with a multi-view diffusion model. Given any number of input images and a set of target novel viewpoints, our model generates highly consistent novel views of a scene. These generated views can be used as input to robust 3D reconstruction techniques to produce 3D representations that can be rendered from any viewpoint in real-time. CAT3D can create entire 3D scenes in as little as one minute, and outperforms existing methods for single image and few-view 3D scene creation." />
+        content="Achieving high-fidelity reconstructions of dynamic and deformable objects typi- cally relies on costly, calibrated camera rigs or proprietary 3D templates like SMPL, making reconstructions in uncontrolled environments challenging. We propose a method to create re-animatable 3D models from monocular images, bypassing pre-built templates and introducing three key innovations. First, we use noisy 2D landmark detectors and 3D lifters, often limited by missing camera intrinsics and inconsistent bone lengths. We introduce a novel nonlinear optimization process that refines landmark detection and skeletal rigidity from monocular sequences, enhancing 3D accuracy. Second, we show that 3D parametric templates, limited to quadrupeds and humans, are not required. We use a new heuristic based on the 3D lifted skeleton, doubling as an animation rig, and a Gaussian-splatting differentiable renderer that handles a wide array of objects, including non-human and inanimate entities. Finally, we demonstrate that these innovations enable robust re-animations and reconstructions of dense 3D geometry from uncalibrated monoc- ular sequences, without prior 3D template knowledge. We evaluated our method with controlled and in-the-wild datasets featuring a diverse array of deformable objects. It achieved comparable or better results in novel view and pose synthesis than leading template-based methods, as measured by PSNR and SSIM." />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="RAT4D: Rig and Animate any object without Templates in 4D" />
@@ -35,14 +35,24 @@
     <link rel="stylesheet" href="css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WH97XRZC');</script>
+    <!-- End Google Tag Manager -->    
+
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZERS5BVPS"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'G-8ZERS5BVPS');
-    </script>   
+    </script>    -->
+
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
@@ -68,6 +78,11 @@
 </head>
 
 <body style="padding: 5%; padding-top: min(15px, 5%); padding-bottom: min(5px, 5%); width: 100%">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WH97XRZC"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div class="container-lg text-center" style="max-width: 1500px; margin: auto;" id="main">
         <header role="banner">
             <!-- <div class="container" id="main"> -->
@@ -114,9 +129,9 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <video id="co3d-grid" poster="img/teaser_frame.png" width="100%" autoplay loop muted controls playsinline>
-					  <source src="videos/teaser/cat_compress.mp4" type="video/mp4"></source>
-                        A grid of various image to 3D results are shown, ranging from animals, food, fantasy creatures, paintings, and
-                        nature scenes. A zoom reveals an even larger grid of results. The animated CAT3D logo appears.
+					  <source src="videos/teaser/rat4d.mp4" type="video/mp4"></source>
+                        <!-- A grid of various image to 3D results are shown, ranging from animals, food, fantasy creatures, paintings, and
+                        nature scenes. A zoom reveals an even larger grid of results. The animated CAT3D logo appears. -->
                     </video>
                 </div>
             </div>
@@ -125,23 +140,10 @@
                     <h6 style="text-align: center; color:rgb(0, 0, 0)"><strong>TL;DR</strong>: Create 4D rigs and models of any deformable object without templates from a single video.</h6>
                 </div>
             </div><br><br>
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <h3> How it works </h3>
-                    <p class="text-justify" style="text-align: left;">
-                        From a single monocular image, our RAT4D method utilizes a sophisticated nonlinear optimization process to refine detected 2D landmarks into accurate 3D poses, free from the constraints of predefined templates. These refined poses are then processed through a template-free Gaussian splatting renderer to create re-animatable and high-fidelity 3D models. The entire process, from image input to 3D model generation, is designed to be efficient, typically completing within a few minutes.
-                    </p>
-                    <video muted loop autoplay src="videos/howitworks.mp4" style="max-width:878px" width=100%>
-                        An animated diagram briefly describing the method. On the left, an input image is shown. Next are samples from the
-                        diffusion model (5 secs), with a spinning camera path. Finally, it shows the optimised 3D Model obtained by
-                        optimizing a NeRF (55 seconds).
-                    </video>
-                </div>
-            </div><br><br>
 
             <div class="row col-md-8 offset-md-2 rounded card" style="background-color: #d0d5ec;">
                 <h2 style="text-align: center;">Interactive Results</h2>
-                Explore our 3D scenes, converted to Gaussian Splats.
+                Explore our scenes in 4D, converted to Gaussian Splats.
                 <div class="text-center" id="splat-picker">
                     <div id="progress-container">
                         <dialog open id="progress-dialog">
@@ -173,6 +175,22 @@
 
             <br>
             <br>
+            
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3> How it works </h3>
+                    <p class="text-justify" style="text-align: left;">
+                        From a single monocular video, our RAT4D method utilizes a sophisticated nonlinear optimization process to refine detected 2D landmarks into accurate 3D poses, free from the constraints of predefined templates. These refined poses are then processed through a template-free Gaussian splatting renderer to create re-animatable and high-fidelity 3D models. The entire process, from image input to 3D model generation, is designed to be efficient, typically completing within a few minutes.
+                    </p>
+                    <video muted loop autoplay src="videos/howitworks.mp4" style="max-width:878px" width=100%>
+                        An animated diagram briefly describing the method. On the left, an input image is shown. Next are samples from the
+                        diffusion model (5 secs), with a spinning camera path. Finally, it shows the optimised 3D Model obtained by
+                        optimizing a NeRF (55 seconds).
+                    </video>
+                </div>
+            </div><br><br>
+
+
             <br>
             <br>
 
@@ -231,7 +249,7 @@
                             <div class="overlay position-absolute bg-dark top-0 start-0 text-white p-1 opacity-75"
                                 id="single-comp-label-left">Input</div>
                             <div class="overlay position-absolute bg-dark top-0 start-50 text-white p-1 opacity-75"
-                                id="single-comp-label-right"><img src="img/cat3D.png" style="width: 30px;"></div>
+                                id="single-comp-label-right"><img src="img/logo.png" style="width: 30px;"></div>
                         </div>
 
                         <div class="pill-row scene-pills" id="realmdreamer-pills" role="group" aria-relevant="additions text">
