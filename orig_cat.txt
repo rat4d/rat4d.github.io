@@ -1,0 +1,557 @@
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h3>
+                        Detailed analysis of our method
+                    </h3>
+
+
+                    <div id="single-image-compare">
+                        <div class="row m-2">
+                            <div class="col-md-10">
+                                <ul class="nav nav-pills justify-content-center" role="navigation">
+                                    <li class="nav-item">
+                                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+                                            style="width: 110px"><strong>Comparison method:</strong></a>
+                                    </li>
+                                    <li class="nav-item method-pill" data-value="realmdreamer"><a class="nav-link active">RealmDreamer <span style="font-size: 10px;"><br>(Single View)</span></a></li>
+                                    <!-- <li class="nav-item method-pill" data-value="zero_nvs"><a class="nav-link">ZeroNVS <span style="font-size: 10px;"><br>(Single View)</span></a></li>
+                                    <li class="nav-item method-pill" data-value="image_dream"><a class="nav-link">ImageDream <span style="font-size: 10px;"><br>(Single View)</span></a> </li>
+                                    <li class="nav-item method-pill" data-value="zipnerf"><a class="nav-link">ZipNeRF <span style="font-size: 10px;"><br>(3 View)</span></a></li>
+                                    <li class="nav-item method-pill" data-value="reconfusion"><a class="nav-link">ReconFusion <span style="font-size: 10px;"><br>(3 View)</span></a></li> -->
+                                </ul>
+                            </div>
+
+                            <div class="btn-group btn-group-sm col-md-2 d-flex align-items-center" style="padding-top: 5px" id="mode-buttons">
+                                <button class="btn btn-primary mode-pill float-right active" data-value="rgb">
+                                    RGB
+                                </button>
+                                <button class="btn btn-primary mode-pill float-right" data-value="depth">
+                                    Depth
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="video-container container position-relative p-0">
+
+                            <video class="video col-6" id="single-comp-left" loop playsinline autoplay muted>
+                            </video><video class="video col-6" id="single-comp-right" loop playsinline autoplay muted>
+                            </video>
+
+                            <div class="overlay position-absolute bg-dark top-0 start-0 text-white p-1 opacity-75"
+                                id="single-comp-label-left">Baseline</div>
+                            <div class="overlay position-absolute bg-dark top-0 start-50 text-white p-1 opacity-75"
+                                id="single-comp-label-right"><img src="img/cat3D.png" style="width: 48px;"></div>
+                        </div>
+
+                        <div class="pill-row scene-pills" id="realmdreamer-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="bug">
+                                <img class="card-img" src="thumbnails/realmdreamer/arcade.jpg">
+                            </div>
+                            <div class="pill scene-pill" data-value="bathroom2">
+                                <img class="card-img" src="thumbnails/realmdreamer/bathroom2.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="bear">
+                                <img class="card-img" src="thumbnails/realmdreamer/bear.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="bedroom3">
+                                <img class="card-img" src="thumbnails/realmdreamer/bedroom3.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="bust">
+                                <img class="card-img" src="thumbnails/realmdreamer/bust.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="car">
+                                <img class="card-img" src="thumbnails/realmdreamer/car.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="forest">
+                                <img class="card-img" src="thumbnails/realmdreamer/forest.jpg">
+                            </div>
+                            <div class="pill scene-pill" data-value="kitchen">
+                                <img class="card-img" src="thumbnails/realmdreamer/kitchen.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="lighthouse">
+                                <img class="card-img" src="thumbnails/realmdreamer/lighthouse.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="piano">
+                                <img class="card-img" src="thumbnails/realmdreamer/piano.jpg">
+                            </div>
+                            <div class="pill scene-pill" data-value="resolute">
+                                <img class="card-img" src="thumbnails/realmdreamer/resolute.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="steampunk">
+                                <img class="card-img" src="thumbnails/realmdreamer/steampunk.jpg">
+                            </div>
+                            <div class="pill scene-pill" data-value="victorian">
+                                <img class="card-img" src="thumbnails/realmdreamer/victorian.jpg">
+                            </div>
+                        </div>
+
+                        <div class="pill-row scene-pills" id="zero_nvs-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="bicycle">
+                                <img class="card-img" src="thumbnails/zero_nvs/bicycle.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="bonsai">
+                                <img class="card-img" src="thumbnails/zero_nvs/bonsai.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="counter">
+                                <img class="card-img" src="thumbnails/zero_nvs/counter.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="flowers">
+                                <img class="card-img" src="thumbnails/zero_nvs/flowers.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="garden">
+                                <img class="card-img" src="thumbnails/zero_nvs/garden.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="kitchen">
+                                <img class="card-img" src="thumbnails/zero_nvs/kitchen.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="room">
+                                <img class="card-img" src="thumbnails/zero_nvs/room.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="stump">
+                                <img class="card-img" src="thumbnails/zero_nvs/stump.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="treehill">
+                                <img class="card-img" src="thumbnails/zero_nvs/treehill.png">
+                            </div>
+                        </div>
+
+                        <div class="pill-row scene-pills" id="zipnerf-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="bicycle">
+                                <img class="card-img" src="thumbnails/reconfusion/bicycle.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="bonsai">
+                                <img class="card-img" src="thumbnails/reconfusion/bonsai.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="counter">
+                                <img class="card-img" src="thumbnails/reconfusion/counter.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="flowers">
+                                <img class="card-img" src="thumbnails/reconfusion/flowers.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="garden">
+                                <img class="card-img" src="thumbnails/reconfusion/garden.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="kitchen">
+                                <img class="card-img" src="thumbnails/reconfusion/kitchen.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="room">
+                                <img class="card-img" src="thumbnails/reconfusion/room.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="stump">
+                                <img class="card-img" src="thumbnails/reconfusion/stump.png">
+                            </div>
+                        
+                            <div class="pill scene-pill" data-value="treehill">
+                                <img class="card-img" src="thumbnails/reconfusion/treehill.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="co3d_apple_110_13051_23361">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_apple_110_13051_23361.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_ball_123_14352_28341">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_ball_123_14352_28341.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_bench_167_18175_33897">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_bench_167_18175_33897.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_bench_185_19987_38634">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_bench_185_19987_38634.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_cake_201_21631_44304">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_cake_201_21631_44304.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_donut_198_21296_42378">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_donut_198_21296_42378.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_donut_290_30761_58510">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_donut_290_30761_58510.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_hydrant_134_15451_31119">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_hydrant_134_15451_31119.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_hydrant_147_16374_32167">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_hydrant_147_16374_32167.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_plant_188_20319_36755">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_plant_188_20319_36755.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_plant_188_20360_39345">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_plant_188_20360_39345.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_suitcase_197_21239_42788">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_suitcase_197_21239_42788.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_suitcase_247_26503_52258">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_suitcase_247_26503_52258.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_teddybear_118_13848_27594">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_teddybear_118_13848_27594.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_teddybear_159_17485_33236">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_teddybear_159_17485_33236.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_vase_101_11754_20739">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_vase_101_11754_20739.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_vase_118_13872_29491">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_vase_118_13872_29491.png">
+                            </div>  
+  
+                        </div>
+
+                        <div class="pill-row scene-pills" id="reconfusion-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="bicycle">
+                                <img class="card-img" src="thumbnails/reconfusion/bicycle.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="bonsai">
+                                <img class="card-img" src="thumbnails/reconfusion/bonsai.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="counter">
+                                <img class="card-img" src="thumbnails/reconfusion/counter.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="flowers">
+                                <img class="card-img" src="thumbnails/reconfusion/flowers.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="garden">
+                                <img class="card-img" src="thumbnails/reconfusion/garden.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="kitchen">
+                                <img class="card-img" src="thumbnails/reconfusion/kitchen.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="room">
+                                <img class="card-img" src="thumbnails/reconfusion/room.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="stump">
+                                <img class="card-img" src="thumbnails/reconfusion/stump.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="treehill">
+                                <img class="card-img" src="thumbnails/reconfusion/treehill.png">
+                            </div>
+
+                            <div class="pill scene-pill" data-value="co3d_apple_110_13051_23361">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_apple_110_13051_23361.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_ball_123_14352_28341">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_ball_123_14352_28341.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_bench_167_18175_33897">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_bench_167_18175_33897.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_bench_185_19987_38634">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_bench_185_19987_38634.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_cake_201_21631_44304">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_cake_201_21631_44304.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_donut_198_21296_42378">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_donut_198_21296_42378.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_donut_290_30761_58510">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_donut_290_30761_58510.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_hydrant_134_15451_31119">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_hydrant_134_15451_31119.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_hydrant_147_16374_32167">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_hydrant_147_16374_32167.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_plant_188_20319_36755">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_plant_188_20319_36755.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_plant_188_20360_39345">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_plant_188_20360_39345.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_suitcase_197_21239_42788">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_suitcase_197_21239_42788.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_suitcase_247_26503_52258">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_suitcase_247_26503_52258.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_teddybear_118_13848_27594">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_teddybear_118_13848_27594.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_teddybear_159_17485_33236">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_teddybear_159_17485_33236.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_vase_101_11754_20739">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_vase_101_11754_20739.png">
+                            </div>  
+  
+
+                            <div class="pill scene-pill" data-value="co3d_vase_118_13872_29491">
+                                <img class="card-img" src="thumbnails/reconfusion/co3d_vase_118_13872_29491.png">
+                            </div>  
+  
+                        </div>
+
+                        <div class="pill-row scene-pills" id="image_dream-pills" role="group" aria-relevant="additions text">
+                            <div class="pill scene-pill" data-value="bear">
+                                <img class="card-img" src="thumbnails/image_dream/bear.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="corgi">
+                                <img class="card-img" src="thumbnails/image_dream/corgi.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="frog">
+                                <img class="card-img" src="thumbnails/image_dream/frog.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="ghost">
+                                <img class="card-img" src="thumbnails/image_dream/ghost.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="house">
+                                <img class="card-img" src="thumbnails/image_dream/house.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="katana">
+                                <img class="card-img" src="thumbnails/image_dream/katana.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="mech">
+                                <img class="card-img" src="thumbnails/image_dream/mech.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="pig">
+                                <img class="card-img" src="thumbnails/image_dream/pig.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="pile">
+                                <img class="card-img" src="thumbnails/image_dream/pile.png">
+                            </div>
+                            <div class="pill scene-pill" data-value="tank">
+                                <img class="card-img" src="thumbnails/image_dream/tank.png">
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        playbackSpeeds = {
+                            "realmdreamer": [3.0, 1.0],
+                            "zero_nvs": [1.5, 1.0],
+                            "zipnerf": [1.5, 1.0],
+                            "reconfusion": [1.5, 1.0],
+                            "image_dream": [1.5, 1.0],
+                        };
+
+                        aspectRatios = {
+                            "realmdreamer": 1.0,
+                            "zero_nvs": 1.5,
+                            "zipnerf": 1.5,
+                            "reconfusion": 1.5,
+                            "image_dream": 1.0,
+                        }
+
+                        labels = {
+                            "realmdreamer": "RealmDreamer",
+                            "zero_nvs": "ZeroNVS",
+                            "zipnerf": "ZipNeRF (3-view)",
+                            "reconfusion": "ReconFusion (3-view)",
+                            "image_dream": "ImageDream",
+                        }
+
+                        compareDiv = document.querySelector("#single-image-compare")
+                        activeMethod = "realmdreamer"
+                        activeScene = "bear"
+                        activeMode = "rgb"
+
+                        // Select all elements with the class 'method-pill'
+                        const methodPills = compareDiv.querySelectorAll('.method-pill');
+                        const modePillParent = compareDiv.querySelector('#mode-buttons')
+                        const modePills = modePillParent.querySelectorAll('.mode-pill')
+
+                        for (modePill of modePills) {
+                            modePill.addEventListener('click', function () {
+                                activeMode = this.getAttribute('data-value');
+                                updateDisplay();
+                            });
+                        }
+
+
+                        const videoParent = compareDiv.querySelector(".video-container");
+                        const leftVideo = videoParent.querySelector('#single-comp-left')
+                        const leftLabel = videoParent.querySelector("#single-comp-label-left")
+                        const rightVideo = videoParent.querySelector('#single-comp-right')
+                        const scenePillContainers = compareDiv.querySelectorAll(`.scene-pills`);
+
+                        for (methodPill of methodPills) {
+                            const method = methodPill.getAttribute('data-value');
+                            // Select all scene pill containers
+                            const scenePillContainer = compareDiv.querySelector(`#${method}-pills`);
+                            const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+
+                            for (scenePill of scenePills) {
+                                scenePill.addEventListener('click', function () {
+                                    activeScene = this.getAttribute("data-value")
+                                    console.log(activeScene);
+                                    updateDisplay();
+                                });
+                            }
+
+                            // Attach a click event listener to each pill
+                            methodPill.addEventListener('click', function () {
+                                activeMethod = method
+                                activeMode = "rgb"
+                                const scenePillContainer = compareDiv.querySelector(`#${method}-pills`);
+                                const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+                                activeScene = scenePills[0].getAttribute("data-value")
+                                updateDisplay();
+                            });
+                        }
+
+                        function updateDisplay() {
+                            if (activeMethod == 'image_dream') {
+                                modePillParent.style.display = 'none';
+                            } else {
+                                modePillParent.style.display = '';
+                            }
+                            // Update active pill
+
+                            methodPills.forEach(p => p.classList.remove('active'));
+                            methodPills.forEach(methodPill => {
+                                if (methodPill.getAttribute('data-value') == activeMethod) {
+                                    methodPill.querySelector('a').classList.add('active');
+                                } else {
+                                    methodPill.querySelector('a').classList.remove('active')
+                                }
+                            });
+
+                            // Update mode pill
+                            for (modePill of modePills) {
+                                if (modePill.getAttribute('data-value') === activeMode) {
+                                    modePill.classList.add('active');
+                                } else {
+                                    modePill.classList.remove('active');
+                                }
+                            }
+
+                            // Show/Hide scene pill containers based on the selected method
+                            scenePillContainers.forEach(container => {
+                                if (container.id === `${activeMethod}-pills`) {
+                                    container.style.display = ''; // Or 'block' depending on your layout
+                                } else {
+                                    container.style.display = 'none';
+                                }
+                            });
+
+                            const scenePillContainer = compareDiv.querySelector(`#${activeMethod}-pills`);
+                            const scenePills = scenePillContainer.querySelectorAll(".scene-pill")
+
+                            for (scenePill of scenePills) {
+                                if (scenePill.getAttribute('data-value') == activeScene) {
+                                    scenePill.classList.add('active');
+                                } else {
+                                    scenePill.classList.remove('active')
+                                }
+                            }
+
+                            var zdist = "";
+                            if (activeMode == "depth") {
+                                zdist = "_zdist";
+                            }
+
+                            // Update video display. This still has a small flash, could double buffer the video like before, but
+                            // as long as the layout stays consistent it really isn't bad.
+                            leftVideo.src = `videos/comparison/${activeMethod}/baseline/${activeScene}${zdist}.webm`
+                            rightVideo.src = `videos/comparison/${activeMethod}/ours/${activeScene}${zdist}.webm`
+
+                            var [lr, rr] = playbackSpeeds[activeMethod];
+                            leftVideo.playbackRate = lr;
+                            rightVideo.playbackRate = rr;
+
+                            videoParent.style.aspectRatio = aspectRatios[activeMethod] * 2.0;
+
+                            console.log(leftLabel)
+                            console.log(leftLabel.innerHtml)
+
+                            leftLabel.innerHTML = labels[activeMethod];
+                        }
+                        // Update initial display
+                        updateDisplay()
+                    </script>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <br>
+            <br>
+
