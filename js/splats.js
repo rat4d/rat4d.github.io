@@ -55,12 +55,9 @@ export async function setSplatScene(name, view) {
     view.progressDialog.show();
     view.progressIndicator.value = 0.0;
 
-    // const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/${name}/splat.ply`, scene, (progress) => {
-    //     view.progressIndicator.value = progress * 100;
-    // });
-    const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/splats/${name}/splat.ply`, scene, (progress) => {
+    const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/${name}/splat.ply`, scene, (progress) => {
         view.progressIndicator.value = progress * 100;
-    });    
+    });
 
     // const rotation = new SPLAT.Vector3(Math.PI - Math.PI / 20.0, Math.PI, 0);
     // // const rotation = new SPLAT.Vector3(-Math.PI, -Math.PI, 0);
