@@ -1,6 +1,8 @@
 import { OrbitControls } from "./OrbitControls.js";
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
-const bucket = "http://localhost:8000/splats";
+// const bucket = "http://localhost:8000/splats";
+const bucket = "/splats"; // Use relative path for live site
+
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
