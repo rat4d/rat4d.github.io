@@ -1,7 +1,8 @@
 import { OrbitControls } from "./OrbitControls.js";
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 // const bucket = "http://localhost:8000/splats";
-const bucket = "/splats"; // Use relative path for live site
+const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
+// const bucket = "/splats"; // Use relative path for live site
 
 
 function shuffleArray(array) {
@@ -53,9 +54,14 @@ export async function setSplatScene(name, view) {
     view.progressDialog.show();
     view.progressIndicator.value = 0.0;
 
-    const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/${name}/splat.ply`, scene, (progress) => {
+    // Load the splat file from Google Cloud Storage
+    const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/splats/${name}/splat.ply`, scene, (progress) => {
         view.progressIndicator.value = progress * 100;
     });
+
+    // view.progressDialog.close();    
+
+    // const splat = await SPLAT.PLYLoader.LoadAsync(`${bucket}/${name}/splat.ply`, scene, (progress) => {view.progressIndicator.value = progress * 100;});
 
     // const rotation = new SPLAT.Vector3(Math.PI - Math.PI / 20.0, Math.PI, 0);
     // // const rotation = new SPLAT.Vector3(-Math.PI, -Math.PI, 0);
@@ -195,7 +201,8 @@ export async function setupCarousel(view, carousel) {
             });
 
             const img = card.querySelector("img");
-            img.src = `${bucket}/${file}/input.png`;
+            img.src = `${bucket}/splats/${file}/input.png`;
+            // img.src = `${bucket}/${file}/input.png`;
 
             let isAnimating = false;
             let latestEvent = null;
