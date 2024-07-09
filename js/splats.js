@@ -1,6 +1,7 @@
 import { OrbitControls } from "./OrbitControls.js";
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 // const bucket = "http://localhost:8000/splats";
+// const bucket = "http://localhost:8000";
 const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
 // const bucket = "/splats"; // Use relative path for live site
 
@@ -12,10 +13,31 @@ function shuffleArray(array) {
     }
 }
 
+// async function listFolders() {
+//     const directories = [
+//         "bug", "kangaroo", "tokyo",
+//         // "man",
+//         "zju_0", "zju_1", "zju_2", "zju_3", "zju_4", "zju_5", "zju_6", "zju_7", "zju_8", "zju_9",
+//         "zju_10", "zju_11", "zju_12", "zju_13", "zju_14", "zju_15", "zju_16", "zju_17", "zju_18", "zju_19",
+//         "zju_20", "zju_21", "zju_22", "zju_23", "zju_24", "zju_25", "zju_26", "zju_27", "zju_28", "zju_29",
+//         "zju_30", "zju_31", "zju_32", "zju_33", "zju_34", "zju_35", "zju_36", "zju_37", "zju_38", "zju_39",
+//         "zju_40", "zju_41", "zju_42", "zju_43", "zju_44", "zju_45", "zju_46", "zju_47", "zju_48", "zju_49",
+//         "zju_50", "zju_51", "zju_52", "zju_53", "zju_54", "zju_55", "zju_56", "zju_57", "zju_58", "zju_59",
+//         "zju_60", "zju_61", "zju_62", "zju_63", "zju_64", "zju_65", "zju_66", "zju_67", "zju_68", "zju_69",
+//         "zju_70", "zju_71", "zju_72", "zju_73", "zju_74", "zju_75", "zju_76", "zju_77", "zju_78", "zju_79",
+//         "zju_80", "zju_81", "zju_82", "zju_83", "zju_84", "zju_85", "zju_86", "zju_87", "zju_88", "zju_89",
+//         "zju_90", "zju_91", "zju_92", "zju_93", "zju_94", "zju_95", "zju_96", "zju_97", "zju_98", "zju_99",
+//     ];
+//     return directories;
+// }
+
 async function listFolders() {
-    const directories = [
-        "bug", "man", "kangaroo", "tokyo"
-    ];
+    const directories = {
+        bug: Array.from({ length: 104 }, (_, i) => `bug_${i}`),
+        kangaroo: Array.from({ length: 199 }, (_, i) => `kangaroo_${i}`),
+        tokyo: Array.from({ length: 220 }, (_, i) => `tokyo_${i}`),
+        zju: Array.from({ length: 100 }, (_, i) => `zju_${i}`)
+    };
     return directories;
 }
 
@@ -32,6 +54,40 @@ export function createSplatView(splatParent) {
     view.loading = false;
     view.lastClick = new Date();
     return view;
+}
+
+function pickFiles(directories) {
+    let files = [];
+
+    // Pick one file from each of bug, kangaroo, and tokyo
+    // files.push(directories.bug[0]);
+    // files.push(directories.kangaroo[0]);
+    // files.push(directories.tokyo[0]);
+
+    // Shuffle and pick 5 random files from kangaroo
+    let kangarooFiles = [...directories.kangaroo];
+    shuffleArray(kangarooFiles);
+    files.push(...kangarooFiles.slice(0, 5));
+
+    // Shuffle and pick 5 random files from tokyo
+    let tokyoFiles = [...directories.tokyo];
+    shuffleArray(tokyoFiles);
+    files.push(...tokyoFiles.slice(0, 5));
+
+    // Shuffle and pick 5 random files from bug
+    let bugFiles = [...directories.bug];
+    shuffleArray(bugFiles);
+    files.push(...bugFiles.slice(0, 5));
+
+    // Shuffle and pick 5 random files from zju
+    let zjuFiles = [...directories.zju];
+    shuffleArray(zjuFiles);
+    files.push(...zjuFiles.slice(0, 5));
+
+    // Shuffle the final list of files
+    shuffleArray(files);
+
+    return files;
 }
 
 export async function setSplatScene(name, view) {
@@ -86,7 +142,7 @@ export async function setSplatScene(name, view) {
     // controls.maxPanDistance = 0.05;
     controls.minAngle = -360;
     controls.maxAngle = 360;
-    controls.minZoom = 1.5;
+    controls.minZoom = 5.5; //1.5;
     controls.maxZoom = 35;
     controls.zoomSpeed = 3;
     controls.panSpeed = 0.2;
@@ -153,9 +209,13 @@ export async function setSplatScene(name, view) {
 }
 
 export async function setupCarousel(view, carousel) {
-    let files = await listFolders();
 
-    shuffleArray(files);
+    // let files = await listFolders();
+    // shuffleArray(files);    
+    let directories = await listFolders();
+    let files = pickFiles(directories);
+
+
 
     const prototype = carousel.querySelector("#splat-carousel-prototype");
     const elements = Object.fromEntries(
