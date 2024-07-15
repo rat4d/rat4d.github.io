@@ -35,9 +35,11 @@ async function listFolders() {
     const directories = {
         bug: Array.from({ length: 104 }, (_, i) => `bug_${i}`),
         kangaroo: Array.from({ length: 199 }, (_, i) => `kangaroo_${i}`),
-        tokyo: Array.from({ length: 220 }, (_, i) => `tokyo_${i}`),
-        shyam: Array.from({ length: 900 }, (_, i) => `shyam_${i}`),
-        zju: Array.from({ length: 100 }, (_, i) => `zju_${i}`)
+        // tokyo: Array.from({ length: 220 }, (_, i) => `tokyo_${i}`),
+        tokyo2: Array.from({ length: 200 }, (_, i) => `tokyo2_${i}`),
+        shyam: Array.from({ length: 200 }, (_, i) => `shyam_${i}`),
+        // zju: Array.from({ length: 100 }, (_, i) => `zju_${i}`),
+        mosam: Array.from({ length: 285 }, (_, i) => `mosam_${i}`),
     };
     return directories;
 }
@@ -68,27 +70,37 @@ function pickFiles(directories) {
     // Shuffle and pick 5 random files from kangaroo
     let kangarooFiles = [...directories.kangaroo];
     shuffleArray(kangarooFiles);
-    files.push(...kangarooFiles.slice(0, 5));
+    files.push(...kangarooFiles.slice(0, 3));
+
+    // // Shuffle and pick 5 random files from tokyo
+    // let tokyoFiles = [...directories.tokyo];
+    // shuffleArray(tokyoFiles);
+    // files.push(...tokyoFiles.slice(0, 5));
 
     // Shuffle and pick 5 random files from tokyo
-    let tokyoFiles = [...directories.tokyo];
-    shuffleArray(tokyoFiles);
-    files.push(...tokyoFiles.slice(0, 5));
+    let tokyo2Files = [...directories.tokyo2];
+    shuffleArray(tokyo2Files);
+    files.push(...tokyo2Files.slice(0, 2));    
 
     // Shuffle and pick 5 random files from shyam
     let shyamFiles = [...directories.shyam];
     shuffleArray(shyamFiles);
-    files.push(...shyamFiles.slice(0, 5));
+    files.push(...shyamFiles.slice(0, 2));
 
     // Shuffle and pick 5 random files from bug
     let bugFiles = [...directories.bug];
     shuffleArray(bugFiles);
-    files.push(...bugFiles.slice(0, 5));
+    files.push(...bugFiles.slice(0, 3));
 
-    // Shuffle and pick 5 random files from zju
-    let zjuFiles = [...directories.zju];
-    shuffleArray(zjuFiles);
-    files.push(...zjuFiles.slice(0, 5));
+    // // Shuffle and pick 5 random files from zju
+    // let zjuFiles = [...directories.zju];
+    // shuffleArray(zjuFiles);
+    // files.push(...zjuFiles.slice(0, 3));
+
+    // Shuffle and pick 5 random files from mosam
+    let mosamFiles = [...directories.mosam];
+    shuffleArray(mosamFiles);
+    files.push(...mosamFiles.slice(0, 2));
 
     // Shuffle the final list of files
     shuffleArray(files);
