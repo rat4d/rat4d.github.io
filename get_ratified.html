@@ -1,62 +1,9 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Rattified - Coming Soon</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333;
-        }
-
-        .container {
-            text-align: center;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 0.5em;
-        }
-
-        p {
-            font-size: 1.2em;
-            margin-bottom: 1em;
-        }
-
-        .icon {
-            font-size: 3em;
-            margin-bottom: 0.5em;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="icon">🤗</div>
-        <h1>Get Ratified!</h1>
-        <p>Experience RAT4D: Rig and Animate Anything in 4D.</p>
-        <p>Coming Soon!</p>
-    </div>
-</body>
-</html> -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Rattified - Coming Soon</title>
+    <title>Get Ratified - Coming Soon</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,6 +22,8 @@
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            max-width: 1200px;
         }
 
         h1 {
@@ -101,12 +50,37 @@
             margin: 0 10px;
             vertical-align: middle;
         }
+
+        .videos {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .video-container {
+            flex: 1;
+            max-width: 18%;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100px;
+            height: 120px;
+            border-radius: 20px;
+        }
+
+        .videos-title {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="icon">🤗</div>
-        <h1>Get Ratified!</h1>
+        <h1>Get <b>RAT</b>ified!</h1>
         <p>Create your own animations and rigs.</p>
         <p>Use them in your favorite creative workflows:</p>
         <div class="logos">
@@ -116,12 +90,21 @@
             <img src="img/blender.jpg" alt="Blender Logo">
         </div>
         <p>Share with friends or integrate with video and 3D editing tools.</p>
-        <div class="videos">
+        <div class="videos-title">
             <h2>Experience our 4D VR Demos</h2>
-            
-            <!-- YouTube Video Embed -->
+        </div>
+        <div class="videos">
             <div class="video-container">
                 <iframe src="https://www.youtube.com/embed/NPp6EdWCyZk?si=iv6XuUaLdwMSzrjf" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Q5hvtPpAtOM?si=Ibsnq_XefQUxNf1h" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/QY75EXQONeQ?si=4hyDVOHWFBFwlWnj" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/uGc7zyVcChM?si=K24aGYBlbUaYXutc" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>        
         <p><strong>Coming Soon!</strong></p>
