@@ -1,8 +1,8 @@
 import { OrbitControls } from "./OrbitControls.js";
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 // const bucket = "http://localhost:8000/splats";
-// const bucket = "http://localhost:8000";
-const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
+const bucket = "http://localhost:8000";
+// const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
 // const bucket = "/splats"; // Use relative path for live site
 
 
@@ -36,6 +36,7 @@ async function listFolders() {
         bug: Array.from({ length: 104 }, (_, i) => `bug_${i}`),
         kangaroo: Array.from({ length: 199 }, (_, i) => `kangaroo_${i}`),
         tokyo: Array.from({ length: 220 }, (_, i) => `tokyo_${i}`),
+        shyam: Array.from({ length: 900 }, (_, i) => `shyam_${i}`),
         zju: Array.from({ length: 100 }, (_, i) => `zju_${i}`)
     };
     return directories;
@@ -73,6 +74,11 @@ function pickFiles(directories) {
     let tokyoFiles = [...directories.tokyo];
     shuffleArray(tokyoFiles);
     files.push(...tokyoFiles.slice(0, 5));
+
+    // Shuffle and pick 5 random files from shyam
+    let shyamFiles = [...directories.shyam];
+    shuffleArray(shyamFiles);
+    files.push(...shyamFiles.slice(0, 5));
 
     // Shuffle and pick 5 random files from bug
     let bugFiles = [...directories.bug];
