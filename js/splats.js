@@ -1,8 +1,8 @@
 import { OrbitControls } from "./OrbitControls.js";
 import * as SPLAT from "https://cdn.jsdelivr.net/npm/gsplat@latest";
 // const bucket = "http://localhost:8000/splats";
-const bucket = "http://localhost:8000";
-// const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
+// const bucket = "http://localhost:8000";
+const bucket = "https://storage.googleapis.com/learn_api_splatbucket";
 // const bucket = "/splats"; // Use relative path for live site
 
 
