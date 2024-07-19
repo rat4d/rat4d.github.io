@@ -41,6 +41,7 @@ async function listFolders() {
         // zju: Array.from({ length: 100 }, (_, i) => `zju_${i}`),
         mosam: Array.from({ length: 285 }, (_, i) => `mosam_${i}`),
         gautam: Array.from({ length: 560 }, (_, i) => `gautam_${i}`),
+        box: Array.from({ length: 1 }, (_, i) => `box_${i}`),
     };
     return directories;
 }
@@ -107,6 +108,11 @@ function pickFiles(directories) {
     let gautamFiles = [...directories.gautam];
     shuffleArray(gautamFiles);
     files.push(...gautamFiles.slice(0, 2));
+
+    // Shuffle and pick 5 random files from box
+    let boxFiles = [...directories.box];
+    shuffleArray(boxFiles);
+    files.push(...boxFiles.slice(0, 1));
 
     // Shuffle the final list of files
     shuffleArray(files);
